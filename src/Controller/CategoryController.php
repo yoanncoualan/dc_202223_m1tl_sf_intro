@@ -67,4 +67,18 @@ class CategoryController extends AbstractController
             'edit' => $form->createView()
         ]);
     }
+
+    #[Route('/category/delete/{id}', name:'category_delete')]
+    public function delete(Category $category = null, EntityManagerInterface $em){
+        if($category == null){
+            $this->addFlash('danger', 'Catégorie introuvable');
+        }
+        else{
+            $em->remove($category);
+            $em->flush();
+            $this->addFlash('warning', 'Catégorie supprimée');
+        }
+
+        return $this->redirectToRoute('app_category');
+    }
 }

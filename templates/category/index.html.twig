@@ -24,6 +24,9 @@
                         <a href="{{ path('une_categorie', {'id': c.id}) }}">
                             Voir
                         </a>
+                        <a href="{{ path('category_delete', {'id':c.id}) }}" class="btn btn-danger">
+                            Supprimer
+                        </a>
                     </td>
                 </tr>
             {% endfor %}            

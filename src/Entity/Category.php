@@ -98,4 +98,10 @@ class Category
 
         return $this;
     }
+
+    // Méthode 'magique' appelée automatiquement dès qu'on essaie d'afficher l'objet entier
+    public function __toString()
+    {
+        return $this->title;
+    }
 }

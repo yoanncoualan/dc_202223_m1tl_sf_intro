@@ -12,6 +12,7 @@
             <th>Quantity</th>
             <th>Price</th>
             <th>Category</th>
+            <th>Image</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -23,6 +24,11 @@
                 <td>{{p.quantity}}</td>
                 <td>{{p.price}}</td>
                 <td>{{p.category}}</td>
+                <td>
+                    {% if p.image is not null %}
+                        <img src="{{ asset('/uploads/'~ p.image) }}" style="max-width: 100px;" />
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{path('un_produit', {'id':p.id})}}" class="btn btn-primary">
                         Voir

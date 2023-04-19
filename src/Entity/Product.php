@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
@@ -119,5 +120,15 @@ class Product
         $this->image = $image;
 
         return $this;
+    }
+
+    #[ORM\PostRemove]
+    public function deleteImage(){
+        // Si le produit possède une image
+        if($this->image != null){
+            // On la supprime
+            unlink(__DIR__.'/../../public/uploads/'.$this->image);
+        }
+        return true;
     }
 }

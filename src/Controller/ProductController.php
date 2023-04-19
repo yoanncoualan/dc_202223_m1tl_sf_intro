@@ -10,12 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/product')]
 class ProductController extends AbstractController
 {
     #[Route('/', name: 'app_product')]
-    public function index(EntityManagerInterface $em, Request $r): Response
+    public function index(EntityManagerInterface $em, Request $r, TranslatorInterface $translator): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
@@ -48,7 +49,7 @@ class ProductController extends AbstractController
 
             $em->persist($product);
             $em->flush();
-            $this->addFlash('success', 'Produit ajouté');
+            $this->addFlash('success', $translator->trans('product.added'));
         }
 
         $products = $em->getRepository(Product::class)->findAll();

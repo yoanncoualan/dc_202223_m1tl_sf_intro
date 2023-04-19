@@ -1,0 +1,8 @@
+product:
+  title: Liste des produits
+  added: Produit ajouté
+  nb: Il y a X produits
+
+Name: Nom
+Description: Description
+Quantity: Quantité
